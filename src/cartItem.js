@@ -1,17 +1,6 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-  constructor () {
-    super();
-    this.state = {
-      price: 999,
-      title: 'Mobile Phone',
-      qty: 1,
-      img: ''
-    }
-    // Another way of binding
-    // this.increaseQuantity = this.increaseQuantity.bind(this);
-  }
 
   //Easiest way of binding is through arrow function as it will bind automatically
   increaseQuantity = () => {
@@ -41,7 +30,7 @@ class CartItem extends React.Component {
   }
 
   render () {
-    const { price, title, qty } = this.state;
+    const { price, title, qty } = this.props.product;
     return (
       <div className="cart-item">
         <div className="left-block">
@@ -68,7 +57,10 @@ class CartItem extends React.Component {
               src="https://cdn-icons-png.flaticon.com/128/992/992683.png"
               
               onClick={this.decreaseQuantity} />
-            <img alt="delete" className="action-icons" src="https://cdn-icons-png.flaticon.com/128/1214/1214428.png" />
+            <img alt="delete" 
+              className="action-icons" 
+              src="https://cdn-icons-png.flaticon.com/128/1214/1214428.png" 
+            />
           </div>
         </div>
       </div>
