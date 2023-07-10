@@ -12,27 +12,53 @@ class Cart extends React.Component {
                     title: 'Mobile Phone',
                     qty: 1,
                     img: '',
-                    key:1
+                    id:1
                 },
                 {
                     price: 99,
                     title: 'Cover',
                     qty: 1,
                     img: '',
-                    key:2
+                    id:2
                 },
                 {
                     price: 1999,
                     title: 'Laptop',
                     qty: 1,
                     img: '',
-                    key:3
+                    id:3
                 },      
             ]
 
         }
         // Another way of binding
-        // this.increaseQuantity = this.increaseQuantity.bind(this);
+        // this.handleIncreaseQuantity = this.handleIncreaseQuantity.bind(this);
+    }
+
+    handleIncreaseQuantity = (product) => {
+        console.log('Product to be increased: ', product);
+        const {products} = this.state;
+        const index = products.indexOf(product);
+        products[index].qty+=1;
+
+        this.setState({
+            products: products
+        })
+    }
+
+    handleDecreaseQuantity = (product) => {
+        console.log('Product to be increased: ', product);
+        const {products} = this.state;
+        const index = products.indexOf(product);
+
+        if(products[index].qty==1){
+            return;
+        }
+        products[index].qty-=1;
+
+        this.setState({
+            products: products
+        })
     }
 
     render() {
@@ -41,7 +67,14 @@ class Cart extends React.Component {
             <div className='cart'>
 
                 {products.map((product)=>{
-                    return <CartItem product={product}/>
+                    return ( 
+                        <CartItem 
+                            product={product} 
+                            key={product.id}
+                            onIncreaseQuantity={this.handleIncreaseQuantity}
+                            onDecreaseQuantity={this.handleDecreaseQuantity}
+                        /> 
+                    )
                 })}
             </div>
         );
